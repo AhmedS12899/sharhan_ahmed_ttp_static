@@ -1,11 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en" dir="itr">
+	<head>
+	<meta charset="utf-8">
   <title>Display Time</title>
-</head>
-<body onLoad="DisplayTime()">
-  <script src="js/script.js"></script>
-  <div id="clockDisplay" class="container"></div>
-  <h1>My name is Ahmed Sharhan and my favorite hobby is playing basketball</h1>
-</body>
+  <link rel="stylesheet" href="style.css">
+  		  <h1>My name is Ahmed Sharhan and my favorite hobby is playing basketball</h1>
+	</head> 
+	<body onload="initTime()">
+	<!--digital clock start -->
+	<div class="time">
+		<span id="hours">00</span>:
+		<span id="minutes">00</span>:
+		<span id="seconds">00</span>
+	</div>
+		<!--digital clock end-->
+		<script type="text/javascript">
+		function updateTime(){
+		var now = new Date();
+		var h = now.getHours(),
+		m = now.getMinutes(),
+		s = now.getSeconds();
+		
+		if(h ==0){
+			h=12;
+		}
+		if(h>12){
+			h = h-12;
+		}
+		if(h<10){
+		h = "0" + h;
+		}
+		if(m<10){
+		m = "0" + m;
+		}
+		if(s<10){
+		s = "0" + s;
+		}
+		Number.prototype.pad = function(digits){
+			for(var n = this.toString(); n.length< digits;n=0+n);
+			return n;
+		}
+		var ids = ["hours", "minutes", "seconds"];
+		var values = [h, m, s];
+		
+		for(var i = 0;i<ids.length;i++){
+		document.getElementById(ids[i]).firstChild.nodeValue = values[i];
+		}
+		}
+		
+		function initTime(){
+			updateTime();
+			window.setInterval("updateTime",1000);
+		}
+		</script>
+		
+	</body>
 </html>
